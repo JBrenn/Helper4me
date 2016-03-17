@@ -1,3 +1,4 @@
 import(chron)
+import(fasttime)
 
 exportPattern("^[[:alpha:]]+")

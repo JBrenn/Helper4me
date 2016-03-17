@@ -1,5 +1,5 @@
 help_parseDateTime <- function(x.date, x.time, format=list(date="%Y-%m-%d", time="%H:%M:%S"),
-                               parse.to="chron",
+                               parse.to="chron", fasttime = FALSE,
                                timezone="GMT")
 {
   # if is date
@@ -9,10 +9,15 @@ help_parseDateTime <- function(x.date, x.time, format=list(date="%Y-%m-%d", time
   # if is datetime
 
     if (parse.to!="chron") {
-      # POSIXct
-      out <- as.POSIXct(strftime(x = paste(x.date, x.time, sep=" "),
-                                 format = paste(format$date, format$time, sep=" "),
-                                 tz = timezone))
+      # POSIXct with fasttime
+      if (fasttime) {
+        out <- fastPOSIXct(x = paste(x.date, x.time, sep=" "), required.components=5))
+      } else {
+        # POSIXct
+        out <- as.POSIXct(strftime(x = paste(x.date, x.time, sep=" "),
+                                   format = paste(format$date, format$time, sep=" "),
+                                   tz = timezone))
+      }
     } else {
       # chron
       new.format <- lapply(format, function(x) gsub(x=x, pattern="%", replacement=""))

@@ -5,7 +5,7 @@
 Update GitHub library
 }
 \description{
-Update GitHub library, and source into workspace
+Update GitHub library, by default from user repository "Jrenn"
 }
 \usage{
 help_updateGITlib(lib, user="JBrenn")
