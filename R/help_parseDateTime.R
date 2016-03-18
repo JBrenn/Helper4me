@@ -3,7 +3,12 @@ help_parseDateTime <- function(x.date, x.time, format=list(date="%Y-%m-%d", time
                                timezone="GMT")
 {
   # for chron parsing
-  if (format$time=="%H:%M" & parse.to == "chron") x.time <- paste(x.time, "00", sep=":")
+  if (format$time=="%H:%M" & parse.to == "chron") 
+  {
+    x.time <- paste(x.time, "00", sep=":")
+    format$time <- "%H:%M:%S"
+  }
+   
   
   # if is date 
   if (is.null(x.time)) {
