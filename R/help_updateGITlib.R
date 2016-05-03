@@ -1,11 +1,16 @@
-help_updateGITlib <- function(lib, user="JBrenn", branch="master")
+help_updateGITlib <- function(lib, user="JBrenn", branch="master", bld_vignettes=TRUE)
 {
   if (any(installed.packages()[,1]==lib))
     remove.packages(lib)
 
   # devtools::install_github(repo = lib, username = user)
   if (branch=="master") {
-    devtools::install_github(paste(user,lib, sep="/"))
+    if (bld_vignettes) {
+      devtools::install_github(paste(user,lib, sep="/"), build_vignettes = TRUE)
+    } else {
+      devtools::install_github(paste(user,lib, sep="/"))
+    }
+
   } else {
     devtools::install_github(paste(user,"/",lib,"@",branch, sep=""))
   }
