@@ -8,12 +8,14 @@ Update GitHub library
 Update GitHub library, by default from user repository "Jrenn"
 }
 \usage{
-help_updateGITlib(lib, user="JBrenn")
+help_updateGITlib(lib, user="JBrenn", branch="master", bld_vignettes=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{lib}{character, GitHub library to update}
+  \item{lib}{character, GitHub repository to update}
   \item{user}{character, GitHub user name}
+  \item{branch}{character, GitHub repository branch}
+  \item{bld_vignettes}{boolean, build vignettes? default = FALSE}
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }

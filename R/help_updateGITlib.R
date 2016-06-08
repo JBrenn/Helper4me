@@ -1,4 +1,4 @@
-help_updateGITlib <- function(lib, user="JBrenn", branch="master", bld_vignettes=TRUE)
+help_updateGITlib <- function(lib, user="JBrenn", branch="master", bld_vignettes=FALSE)
 {
   if (any(installed.packages()[,1]==lib))
     remove.packages(lib)
