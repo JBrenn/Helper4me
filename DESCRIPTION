@@ -2,12 +2,18 @@ Package: Helper4me
 Type: Package
 Title: What the Package Does (Title Case)
 Version: 0.1.1
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Date: 2016-11-25
+Author: Johannes Brenner
+Maintainer: <johannes.brenner@ufz.de>
+Description: simple helper functions for myself
+URL: https://github.com/JBrenn/Helper4me
+License: GPL (>= 2)
 LazyData: TRUE
+Depends:
+    R (>= 3.3)
 Imports:
     chron,
     fasttime,
-    zoo
+    zoo,
+    RNetCDF
+RoxygenNote: 6.0.0
