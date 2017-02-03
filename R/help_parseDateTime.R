@@ -1,3 +1,41 @@
+#' parse to Date or Date.Time objects.
+#' 
+#' parse character vector to Date (base::as.Date) or Date.Time (base::as.POSIXct or chron::chron) objects.
+#' 
+#' @param x.date date character vector.
+#' @param x.time time character vector.
+#' @param format list containing datetime format, default: list(date=..., time=...), 
+#' if format$time = NULL date representation (as.Date) will be used for parsing.
+#' @param parse.to specifying datetime representation, that will be used for parsing, 
+#' either chron (default) or as.POSIXct.
+#' @param timezone timezone only necessary if POSIX representation used, default "GMT"
+#' 
+#' @return date or date.time object
+#' 
+#' @examples
+#' x.time <- c("00:20:00", "00:40:00", "01:00:00")
+#' x.date <- rep("2012-01-01", 3)
+#' 
+#' # chron representation
+#' help_parseDateTime(x.date, x.time, parse.to="chron")
+#' 
+#' # POSIX representation
+#' help_parseDateTime(x.date, x.time, parse.to="POSIX",
+#'                    timezone="GMT")
+#' 
+#' # Date representation
+#' help_parseDateTime(x.date, x.time=NULL)
+#' 
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#' 
+#' @references
+#' 
+#' @seealso
+#' 
+#' @keywords
+#' 
+#' @export help_parseDateTime
+
 help_parseDateTime <- function(x.date, x.time, format=list(date="%Y-%m-%d", time="%H:%M:%S"),
                                parse.to="chron", fasttime = FALSE,
                                timezone="GMT")
