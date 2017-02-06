@@ -62,7 +62,7 @@ help_ts2netcdf <- function(ts, unit, latitude, longitude, name.nc)
   RNetCDF::var.put.nc(ncfile = nc, variable = "time", data = times)
   # set attributes
   # units defining origin, origin can be changed in global settings of zoo - POSIX
-  RNetCDF::att.put.nc(nc, "time", "units", "NC_CHAR", paste("days since", as.Date(0, origin=as.Date("1970-01-01")), "00:00:00", sep=" "))
+  RNetCDF::att.put.nc(nc, "time", "units", "NC_CHAR", paste("days since", as.Date(0), "00:00:00", sep=" "))
   RNetCDF::att.put.nc(nc, "time", "standard_name", "NC_CHAR", "time")
   RNetCDF::att.put.nc(nc, "time", "long_name", "NC_CHAR", "time")
   RNetCDF::att.put.nc(nc, "time", "calendar", "NC_CHAR", "standard")
@@ -72,9 +72,18 @@ help_ts2netcdf <- function(ts, unit, latitude, longitude, name.nc)
   RNetCDF::dim.def.nc(ncfile = nc, dimname = "nv4", dimlength=4)
 
   # set y-lat dimension, length: dim(lat)
-  RNetCDF::dim.def.nc(ncfile = nc, dimname = "y", dimlength = dim(latitude)[1])
+  if (class(latitude)=="numeric") {
+    RNetCDF::dim.def.nc(ncfile = nc, dimname = "y", dimlength = length(latitude))
+  } else {
+    RNetCDF::dim.def.nc(ncfile = nc, dimname = "y", dimlength = dim(latitude)[1])
+  }
+
   # set x-lon dimension, length: dim(lon)
-  RNetCDF::dim.def.nc(ncfile = nc, dimname = "x", dimlength = dim(longitude)[1])
+  if (class(longitude)=="numeric") {
+    RNetCDF::dim.def.nc(ncfile = nc, dimname = "x", dimlength = length(longitude))
+  } else {
+    RNetCDF::dim.def.nc(ncfile = nc, dimname = "x", dimlength = dim(longitude)[1])
+  }
 
   # latitude, longitude
   # variable definition
