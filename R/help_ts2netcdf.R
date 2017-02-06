@@ -18,7 +18,7 @@
 #'
 #' # dummy lat, lon matrix
 #' lat = as.matrix(40, ncol=1); dimnames(lat) = list("x","y")
-#' lon = as.matrix(5 , ncol=1); dimnames(lat) = list("x","y")
+#' lon = as.matrix(5 , ncol=1); dimnames(lon) = list("x","y")
 #'
 #' help_ts2netcdf(ts = ts_date, unit = c("UNIT varA","UNIT varB"),
 #'                latitude = lat, longitude = lon, name.nc="test_date")
@@ -39,7 +39,7 @@
 #'
 #' @export help_ts2netcdf
 
-help_ts2netcdf <- function(ts, unit, latitude, longitude, name.nc)
+help_ts2netcdf <- function(ts, unit, var.name, latitude, longitude, name.nc)
 {
   # create new netCDF file in working dir
   nc <- RNetCDF::create.nc(filename = paste(name.nc,".nc",sep=""))
@@ -72,18 +72,11 @@ help_ts2netcdf <- function(ts, unit, latitude, longitude, name.nc)
   RNetCDF::dim.def.nc(ncfile = nc, dimname = "nv4", dimlength=4)
 
   # set y-lat dimension, length: dim(lat)
-  if (class(latitude)=="numeric") {
-    RNetCDF::dim.def.nc(ncfile = nc, dimname = "y", dimlength = length(latitude))
-  } else {
-    RNetCDF::dim.def.nc(ncfile = nc, dimname = "y", dimlength = dim(latitude)[1])
-  }
+  RNetCDF::dim.def.nc(ncfile = nc, dimname = "y", dimlength = dim(latitude)[1])
 
   # set x-lon dimension, length: dim(lon)
-  if (class(longitude)=="numeric") {
-    RNetCDF::dim.def.nc(ncfile = nc, dimname = "x", dimlength = length(longitude))
-  } else {
-    RNetCDF::dim.def.nc(ncfile = nc, dimname = "x", dimlength = dim(longitude)[1])
-  }
+  RNetCDF::dim.def.nc(ncfile = nc, dimname = "x", dimlength = dim(longitude)[1])
+
 
   # latitude, longitude
   # variable definition
@@ -112,24 +105,40 @@ help_ts2netcdf <- function(ts, unit, latitude, longitude, name.nc)
   # set na to -9999 in ts data
   data <- ifelse(is.na(coredata(ts)),-9999,coredata(ts))
 
-  for (i in 1:dim(data)[2])
-  {
+  if (is.null(dim(data)[2])) {
     # define variable with st.name, dimensions x,y,time
-    RNetCDF::var.def.nc(ncfile = nc, varname = names(ts)[i], vartype = "NC_DOUBLE",
+    RNetCDF::var.def.nc(ncfile = nc, varname = var.name, vartype = "NC_DOUBLE",
                         dimensions = c("x","y","time"))
     # put data
-    RNetCDF::var.put.nc(ncfile = nc, variable = names(ts)[i], data = data[,i],
-                        start = c(1,1,1), count=c(1,1,dim(data)[1]))
+    RNetCDF::var.put.nc(ncfile = nc, variable = var.name, data = data,
+                        start = c(1,1,1), count=c(1,1,length(data)))
     # define attributes
-    RNetCDF::att.put.nc(nc, "lon", "units", "NC_CHAR", unit[i])
-    RNetCDF::att.put.nc(nc, "lon", "standard_name", "NC_CHAR", names(ts)[i])
-    RNetCDF::att.put.nc(nc, "lon", "long_name", "NC_CHAR", names(ts)[i])
+    RNetCDF::att.put.nc(nc, "lon", "units", "NC_CHAR", unit)
+    RNetCDF::att.put.nc(nc, "lon", "standard_name", "NC_CHAR", var.name)
+    RNetCDF::att.put.nc(nc, "lon", "long_name", "NC_CHAR", var.name)
     RNetCDF::att.put.nc(nc, "lon", "missing_value", "NC_INT", -9999)
     RNetCDF::att.put.nc(nc, "lon", "coordinates", "NC_CHAR", "lat lon")
+  } else {
+    for (i in 1:dim(data)[2])
+    {
+      # define variable with st.name, dimensions x,y,time
+      RNetCDF::var.def.nc(ncfile = nc, varname = names(ts)[i], vartype = "NC_DOUBLE",
+                          dimensions = c("x","y","time"))
+      # put data
+      RNetCDF::var.put.nc(ncfile = nc, variable = names(ts)[i], data = data[,i],
+                          start = c(1,1,1), count=c(1,1,dim(data)[1]))
+      # define attributes
+      RNetCDF::att.put.nc(nc, "lon", "units", "NC_CHAR", unit[i])
+      RNetCDF::att.put.nc(nc, "lon", "standard_name", "NC_CHAR", names(ts)[i])
+      RNetCDF::att.put.nc(nc, "lon", "long_name", "NC_CHAR", names(ts)[i])
+      RNetCDF::att.put.nc(nc, "lon", "missing_value", "NC_INT", -9999)
+      RNetCDF::att.put.nc(nc, "lon", "coordinates", "NC_CHAR", "lat lon")
+    }
   }
 
+
   # close nc file
-  close.nc(nc)
+  RNetCDF::close.nc(nc)
 
   print( paste(name.nc,".nc", " created in workng directory.", sep="") )
 }
