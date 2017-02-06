@@ -113,11 +113,11 @@ help_ts2netcdf <- function(ts, unit, var.name, latitude, longitude, name.nc)
     RNetCDF::var.put.nc(ncfile = nc, variable = var.name, data = data,
                         start = c(1,1,1), count=c(1,1,length(data)))
     # define attributes
-    RNetCDF::att.put.nc(nc, "lon", "units", "NC_CHAR", unit)
-    RNetCDF::att.put.nc(nc, "lon", "standard_name", "NC_CHAR", var.name)
-    RNetCDF::att.put.nc(nc, "lon", "long_name", "NC_CHAR", var.name)
-    RNetCDF::att.put.nc(nc, "lon", "missing_value", "NC_INT", -9999)
-    RNetCDF::att.put.nc(nc, "lon", "coordinates", "NC_CHAR", "lat lon")
+    RNetCDF::att.put.nc(nc, var.name, "units", "NC_CHAR", unit)
+    RNetCDF::att.put.nc(nc, var.name, "standard_name", "NC_CHAR", var.name)
+    RNetCDF::att.put.nc(nc, var.name, "long_name", "NC_CHAR", var.name)
+    RNetCDF::att.put.nc(nc, var.name, "missing_value", "NC_INT", -9999)
+    RNetCDF::att.put.nc(nc, var.name, "coordinates", "NC_CHAR", "lat lon")
   } else {
     for (i in 1:dim(data)[2])
     {
@@ -128,11 +128,11 @@ help_ts2netcdf <- function(ts, unit, var.name, latitude, longitude, name.nc)
       RNetCDF::var.put.nc(ncfile = nc, variable = names(ts)[i], data = data[,i],
                           start = c(1,1,1), count=c(1,1,dim(data)[1]))
       # define attributes
-      RNetCDF::att.put.nc(nc, "lon", "units", "NC_CHAR", unit[i])
-      RNetCDF::att.put.nc(nc, "lon", "standard_name", "NC_CHAR", names(ts)[i])
-      RNetCDF::att.put.nc(nc, "lon", "long_name", "NC_CHAR", names(ts)[i])
-      RNetCDF::att.put.nc(nc, "lon", "missing_value", "NC_INT", -9999)
-      RNetCDF::att.put.nc(nc, "lon", "coordinates", "NC_CHAR", "lat lon")
+      RNetCDF::att.put.nc(nc, names(ts)[i], "units", "NC_CHAR", unit[i])
+      RNetCDF::att.put.nc(nc, names(ts)[i], "standard_name", "NC_CHAR", names(ts)[i])
+      RNetCDF::att.put.nc(nc, names(ts)[i], "long_name", "NC_CHAR", names(ts)[i])
+      RNetCDF::att.put.nc(nc, names(ts)[i], "missing_value", "NC_INT", -9999)
+      RNetCDF::att.put.nc(nc, names(ts)[i], "coordinates", "NC_CHAR", "lat lon")
     }
   }
 
