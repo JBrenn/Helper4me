@@ -15,5 +15,6 @@ Imports:
     chron,
     fasttime,
     zoo,
-    RNetCDF
+    RNetCDF,
+    lubridate
 RoxygenNote: 6.0.0
