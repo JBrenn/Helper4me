@@ -25,7 +25,7 @@ help_loadCarboEU <- function(datapath = "/Users/brennerj/tmp/eve_f2_data/data/pr
   # extract station files
   station_files <- files[grepl(pattern = station, x = files)]
 
-  # loop over true_files
+  # loop over station_files
   for (i in station_files)
   {
     # read station data
@@ -39,7 +39,7 @@ help_loadCarboEU <- function(datapath = "/Users/brennerj/tmp/eve_f2_data/data/pr
                               out.format = list(dates="d-m-y", times="h:m:s"))
 
     # for the first file create data and datetime dummy
-    if (i == true_files[1]) {
+    if (i == station_files[1]) {
       dummy_date_time <- date_time
       dummy <- dat
     # append following data to dummies
