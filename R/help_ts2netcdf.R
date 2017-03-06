@@ -62,7 +62,7 @@ help_ts2netcdf <- function(ts, unit, var.name, latitude, longitude, name.nc)
   RNetCDF::var.put.nc(ncfile = nc, variable = "time", data = times)
   # set attributes
   # units defining origin, origin can be changed in global settings of zoo - POSIX
-  RNetCDF::att.put.nc(nc, "time", "units", "NC_CHAR", paste("days since", as.Date(0), "00:00:00", sep=" "))
+  RNetCDF::att.put.nc(nc, "time", "units", "NC_CHAR", paste("days since", as.Date(0, origin = lubridate::origin), "00:00:00", sep=" "))
   RNetCDF::att.put.nc(nc, "time", "standard_name", "NC_CHAR", "time")
   RNetCDF::att.put.nc(nc, "time", "long_name", "NC_CHAR", "time")
   RNetCDF::att.put.nc(nc, "time", "calendar", "NC_CHAR", "standard")
