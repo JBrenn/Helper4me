@@ -35,7 +35,7 @@ help_loadCarboEU <- function(datapath = "/Users/brennerj/tmp/eve_f2_data/data/pr
     # extract time
     time <- paste(dat$Hour,dat$Minute,"00",sep=":")
     # converte date and time into chon object
-    date_time_ <- chron::chron(dates. = date, times. = time, format = list(dates="d-m-y", times="h:m:s"),
+    date_time <- chron::chron(dates. = date, times. = time, format = list(dates="d-m-y", times="h:m:s"),
                               out.format = list(dates="d-m-y", times="h:m:s"))
 
     # for the first file create data and datetime dummy
