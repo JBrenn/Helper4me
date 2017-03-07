@@ -4,7 +4,7 @@
 \alias{help_ts2netcdf}
 \title{Create netCDF from zoo time series object.}
 \usage{
-help_ts2netcdf(ts, unit, latitude, longitude, name.nc)
+help_ts2netcdf(ts, unit, var.name, latitude, longitude, name.nc)
 }
 \arguments{
 \item{ts}{zoo time series object, named.}
@@ -29,15 +29,15 @@ ts_chron <- zoo(ts_data, as.chron(date))
 
 # dummy lat, lon matrix
 lat = as.matrix(40, ncol=1); dimnames(lat) = list("x","y")
-lon = as.matrix(5 , ncol=1); dimnames(lat) = list("x","y")
+lon = as.matrix(5 , ncol=1); dimnames(lon) = list("x","y")
 
-help_ts2netcdf(ts = ts_date, unit = c("UNIT varA","UNIT varB"), 
+help_ts2netcdf(ts = ts_date, unit = c("UNIT varA","UNIT varB"),
                latitude = lat, longitude = lon, name.nc="test_date")
-               
-help_ts2netcdf(ts = ts_POSIX, unit = c("UNIT varA","UNIT varB"), 
+
+help_ts2netcdf(ts = ts_POSIX, unit = c("UNIT varA","UNIT varB"),
                latitude = lat, longitude = lon, name.nc="test_POSIX")
-               
-help_ts2netcdf(ts = ts_chron, unit = c("UNIT varA","UNIT varB"), 
+
+help_ts2netcdf(ts = ts_chron, unit = c("UNIT varA","UNIT varB"),
                latitude = lat, longitude = lon, name.nc="test_chron")
 
 }
