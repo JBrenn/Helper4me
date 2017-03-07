@@ -4,7 +4,9 @@
 \alias{help_loadCarboEU}
 \title{Load CarboEurope station data.}
 \usage{
-help_loadCarboEU(datapath, station)
+
+  help_loadCarboEU(datapath = "/Users/brennerj/tmp/eve_f2_data/data/processed/eddy_carbo_europe",
+  station = "ESES1")
 }
 \arguments{
 \item{datapath}{full path to pre-processed data files}
