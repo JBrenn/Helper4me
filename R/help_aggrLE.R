@@ -9,6 +9,8 @@
 #' @return zoo object, containing quality daily latent heat or evapotranspiration data
 #'
 #' @examples
+#' library(zoo)
+#' library(chron)
 #' # load eddy covariance data
 #' data(eses1)
 #' # extract latent heat
@@ -16,7 +18,7 @@
 #' # spline interpolation
 #' LE_spline <- zoo::na.spline(LE, maxgap=10)
 #' # aggregate latent heat, convert to evapotranspiration
-#' ET <- help_aggrLH(LE = LH_spline, perc_thresh = .1, ET = TRUE)
+#' ET <- help_aggrLE(LE = LE_spline, perc_thresh = .1, ET = TRUE)
 #' # plot time series
 #' plot(ET)
 #'
@@ -28,7 +30,7 @@
 #'
 #' @keywords
 #'
-#' @export help_aggrLH
+#' @export help_aggrLE
 #'
 help_aggrLE <- function(LE, perc_thresh = 0.1, ET = TRUE) {
 

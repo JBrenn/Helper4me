@@ -20,6 +20,8 @@ zoo object, containing quality daily latent heat or evapotranspiration data
 Daily aggregation of latent heat data from eddy covariance systems. Native data time resolution is sub-daily. Conversion to evapotranspiration flux (mm/d) is possible.
 }
 \examples{
+library(zoo)
+library(chron)
 # load eddy covariance data
 data(eses1)
 # extract latent heat
@@ -27,7 +29,7 @@ LE <- eses1$ufz_lE
 # spline interpolation
 LE_spline <- zoo::na.spline(LE, maxgap=10)
 # aggregate latent heat, convert to evapotranspiration
-ET <- help_aggrLH(LE = LH_spline, perc_thresh = .1, ET = TRUE)
+ET <- help_aggrLE(LE = LE_spline, perc_thresh = .1, ET = TRUE)
 # plot time series
 plot(ET)
 
