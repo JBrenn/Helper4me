@@ -49,11 +49,16 @@ help_ts2netcdf <- function(ts, unit, var.name, latitude, longitude, name.nc)
   # or 64-bit offset netCDF dataset can have the length UNLIMITED.
 
   # time
-  if (class(time(ts))[2] == "POSIXt") {
-    times <- as.numeric(time(ts)) / (3600 *24)
-  } else {
+  if (class(time(ts)) == "Date") {
     times <- as.numeric(time(ts))
+  } else {
+    if (class(time(ts))[2] == "POSIXt") {
+      times <- as.numeric(time(ts)) / (3600 *24)
+    } else {
+      times <- as.numeric(time(ts))
+    }
   }
+
   # set time dimension, unlimited
   RNetCDF::dim.def.nc(ncfile = nc, dimname = "time", unlim=TRUE)
   # set time variable definition
