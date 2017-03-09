@@ -25,9 +25,11 @@ help_loadCarboEU <- function(datapath = "/Users/brennerj/tmp/eve_f2_data/data/pr
   # extract station files
   station_files <- files[grepl(pattern = station, x = files)]
 
+  print("reading ...")
   # loop over station_files
   for (i in station_files)
   {
+    print(i)
     # read station data
     dat <- read.csv(file = i, na.strings = c("-9999.0000"))
 
