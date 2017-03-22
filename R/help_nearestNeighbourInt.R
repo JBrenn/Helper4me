@@ -1,7 +1,7 @@
 #' Nearest neighbour interpolation.
 #'
 #' Nearest neighbour interpolation
-#' 
+#'
 #' @param dat numeric vector
 #'
 #' @return
@@ -18,7 +18,7 @@
 #'
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
 #'
-#' @references
+#' @references \url{http://stackoverflow.com/questions/10077415/replacing-nas-in-r-with-nearest-value}
 #'
 #' @seealso
 #'
@@ -40,7 +40,7 @@ help_nearestNeighbourInt <- function(dat) {
   right.pos  <- non.na.pos[pmin(N, intervals+1)]
   left.dist  <- na.pos - left.pos
   right.dist <- right.pos - na.pos
-  
+
   dat[na.pos] <- ifelse(left.dist <= right.dist,
                         dat[left.pos], dat[right.pos])
   return(dat)

@@ -27,7 +27,7 @@ P_interpol <- help_nearestNeighbourInt(P)
 
 }
 \references{
-
+\url{http://stackoverflow.com/questions/10077415/replacing-nas-in-r-with-nearest-value}
 }
 \seealso{
 
