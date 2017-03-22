@@ -2,7 +2,7 @@
 #'
 #' Daily aggregation of latent heat data from eddy covariance systems. Native data time resolution is sub-daily. Conversion to evapotranspiration flux (mm/d) is possible.
 #'
-#' @param LE zoo object, latent heat data in W/m2
+#' @param LE zoo object, subdaily latent heat data in W/m2
 #' @param perc_thresh threshold (percentage of NAs [0;1]) defining if specific day fulfills data quality
 #' @param ET boolean, if TRUE latent heat (W/m2) will be converted to evapotranspiration (mm/d)
 #'

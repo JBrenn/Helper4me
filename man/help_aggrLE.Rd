@@ -7,7 +7,7 @@
 help_aggrLE(LE, perc_thresh = 0.1, ET = TRUE)
 }
 \arguments{
-\item{LE}{zoo object, latent heat data in W/m2}
+\item{LE}{zoo object, subdaily latent heat data in W/m2}
 
 \item{perc_thresh}{threshold (percentage of NAs [0;1]) defining if specific day fulfills data quality}
 
