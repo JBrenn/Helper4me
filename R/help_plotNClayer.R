@@ -1,14 +1,17 @@
-#' impute timeseries in netCDF (at site). 
+#' plot single layer netCDF. 
 #' 
 #' \code{help_plotNClayer} is plotting a single NetCDF file layer.
 #' 
 #' @param infile netCDF file.
+#' @param var netCDF variable.
 #' @param shp shape file, optional.
 #' @param proj_utm boolean, is ncfile projected on UTM
 #' @param crs_proj4 character, proj4 projection definition
 #' @param plot_proj_utm boolean , should out plot be projected
 #' @param outfolder output folder
 #' @param colorRampPal colorRampPalette
+#' @param zlims value limits for ploting
+#' @param flip boolean, Flip the values of a Raster* object by inverting the order of the rows (direction=y)
 #' 
 #' @return plot in pdf.
 #' 
@@ -26,7 +29,7 @@
 #'
 #'
 help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj4="+proj=utm +zone=30 +ellps=intl +units=m +no_defs", plot_proj_utm=TRUE, 
-                             outfolder, colorRampPal=colorRampPalette(brewer.pal(9,"Blues"))(100))
+                             outfolder, colorRampPal=colorRampPalette(brewer.pal(9,"Blues"))(100), zlims, flip=TRUE)
 {
   # Grab the lat and lon from the data
   lat <- raster(infile, varname="lat")
@@ -49,6 +52,8 @@ help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj
   
   # Yay! Now we can properly set the coordinate information for the raster
   pr <- raster::raster(infile, var=var)
+  # flip on y axis 
+  flip(pr, "y")
   
   # Fix the projection and extent
   projection(pr) <- mycrs
@@ -64,25 +69,23 @@ help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj
     shp_longlat <- spTransform(shape, crs(r))
   }
 
-  for (i in 1:pr@file@nbands)
-  {
     if (plot_proj_utm) {
-      pdf(file.path(outfolder,paste(var,i,"_utm.pdf",sep="")))
+      pdf(file.path(outfolder,paste(var,"_utm.pdf",sep="")))
       op <- par(cex=1.5, lwd=1.5)
       # plot raster
-      plot(pr[[i]], col=colorRampPal)
+      plot(pr, col=colorRampPal, zlim=zlims)
       # overplot shape
       if (!is.na(shp)) plot(shp_utm, border=rgb(1,0,0,.75), add=TRUE)
       #Add contours
-      contour(pr[[i]], add=TRUE, labcex = 1.2)
+      contour(pr, add=TRUE, labcex = 1.2)
       par(op)
       dev.off()
     } else {
-      pdf(file.path(outfolder,paste(var,i,"_longlat.pdf",sep="")))
+      pdf(file.path(outfolder,paste(var,"_longlat.pdf",sep="")))
       op <- par(cex=1.5, lwd=1.5)
-      plot(r[[i]], col=colorRampPal)
+      plot(r, col=colorRampPal, zlim=zlims)
       #Add contours
-      contour(r[[i]], add=TRUE, labcex = 1.2)
+      contour(r, add=TRUE, labcex = 1.2)
       # Add country lines
       # library("maps")
       # map(add=TRUE, col=rgb(1,0,0,.5))
@@ -90,5 +93,5 @@ help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj
       par(op)
       dev.off()
     }
-  }
+  
 }
