@@ -1,7 +1,7 @@
-#' plot single layer netCDF. 
-#' 
+#' plot single layer netCDF.
+#'
 #' \code{help_plotNClayer} is plotting a single NetCDF file layer.
-#' 
+#'
 #' @param infile netCDF file.
 #' @param var netCDF variable.
 #' @param shp shape file, optional.
@@ -11,54 +11,54 @@
 #' @param outfolder output folder
 #' @param colorRampPal colorRampPalette
 #' @param zlims value limits for ploting
-#' @param flip boolean, Flip the values of a Raster* object by inverting the order of the rows (direction=y)
-#' 
+#' @param flip boolean, default=FALSE, flip the values of a Raster* object by inverting the order of the rows (direction=y)
+#'
 #' @return plot in pdf.
-#' 
+#'
 #' @examples
-#' 
+#'
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
-#' 
+#'
 #' @references
-#' 
+#'
 #' @seealso
-#' 
+#'
 #' @keywords
-#'  
+#'
 #' @export help_plotNClayer
 #'
 #'
-help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj4="+proj=utm +zone=30 +ellps=intl +units=m +no_defs", plot_proj_utm=TRUE, 
-                             outfolder, colorRampPal=colorRampPalette(brewer.pal(9,"Blues"))(100), zlims, flip=TRUE)
+help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj4="+proj=utm +zone=30 +ellps=intl +units=m +no_defs", plot_proj_utm=TRUE,
+                             outfolder, colorRampPal=colorRampPalette(brewer.pal(9,"Blues"))(100), zlims, flip=FALSE)
 {
   # Grab the lat and lon from the data
   lat <- raster(infile, varname="lat")
   lon <- raster(infile, varname="lon")
-  
+
   # Convert to points and match the lat and lon
   plat <- rasterToPoints(lat)
   plon <- rasterToPoints(lon)
   lonlat <- cbind(plon[,3], plat[,3])
-  
+
   # Specify the lonlat as spatial points with projection as long/lat
   if (proj_utm) {
     lonlat <- SpatialPoints(lonlat, proj4string = CRS(crs_proj4))
   } else {
     lonlat <- SpatialPoints(lonlat, proj4string = CRS("+proj=longlat +datum=WGS84"))
   }
-  
+
   mycrs <- CRS(crs_proj4)
   plonlat <- spTransform(lonlat, CRSobj = mycrs)
-  
+
   # Yay! Now we can properly set the coordinate information for the raster
   pr <- raster::raster(infile, var=var)
-  # flip on y axis 
-  flip(pr, "y")
-  
+  # flip on y axis
+  pr <- flip(pr, "y")
+
   # Fix the projection and extent
   projection(pr) <- mycrs
   extent(pr) <- extent(plonlat)
-  
+
   # Project to long lat grid
   r <- raster::projectRaster(pr, crs=CRS("+proj=longlat +datum=WGS84"))
   if (!is.na(shp)) {
@@ -93,5 +93,5 @@ help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj
       par(op)
       dev.off()
     }
-  
+
 }
