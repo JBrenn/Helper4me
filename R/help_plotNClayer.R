@@ -11,6 +11,8 @@
 #' @param outfolder output folder
 #' @param colorRampPal colorRampPalette
 #' @param zlims value limits for ploting
+#' @param xlims x limits for ploting
+#' @param ylims y limits for ploting
 #' @param flip boolean, default=FALSE, flip the values of a Raster* object by inverting the order of the rows (direction=y)
 #'
 #' @return plot in pdf.
@@ -29,7 +31,7 @@
 #'
 #'
 help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj4="+proj=utm +zone=30 +ellps=intl +units=m +no_defs", plot_proj_utm=TRUE,
-                             outfolder, colorRampPal=colorRampPalette(brewer.pal(9,"Blues"))(100), zlims, flip=FALSE)
+                             outfolder, colorRampPal=colorRampPalette(brewer.pal(9,"Blues"))(100), zlims=NULL, xlims=NULL, ylims=NULL, flip=FALSE)
 {
   # Grab the lat and lon from the data
   lat <- raster(infile, varname="lat")
@@ -53,7 +55,7 @@ help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj
   # Yay! Now we can properly set the coordinate information for the raster
   pr <- raster::raster(infile, var=var)
   # flip on y axis
-  pr <- flip(pr, "y")
+  if (flip) pr <- flip(pr, "y")
 
   # Fix the projection and extent
   projection(pr) <- mycrs
@@ -68,12 +70,16 @@ help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj
     shp_utm     <- spTransform(shape, crs(pr))
     shp_longlat <- spTransform(shape, crs(r))
   }
+  
+  if (is.null(xlims)) xlims = c(0, ncol(r))
+  if (is.null(ylims)) ylims = c(0, nrow(r))
+  if (is.null(zlims)) ylims = range(r)
 
     if (plot_proj_utm) {
       pdf(file.path(outfolder,paste(var,"_utm.pdf",sep="")))
       op <- par(cex=1.5, lwd=1.5)
       # plot raster
-      plot(pr, col=colorRampPal, zlim=zlims)
+      plot(pr, col=colorRampPal, zlim=zlims, xlim=xlims, ylim=ylims)
       # overplot shape
       if (!is.na(shp)) plot(shp_utm, border=rgb(1,0,0,.75), add=TRUE)
       #Add contours
@@ -83,12 +89,12 @@ help_plotNClayer <- function(infile, var="pre", shp=NA, proj_utm=FALSE, crs_proj
     } else {
       pdf(file.path(outfolder,paste(var,"_longlat.pdf",sep="")))
       op <- par(cex=1.5, lwd=1.5)
-      plot(r, col=colorRampPal, zlim=zlims)
+      plot(r, col=colorRampPal, zlim=zlims, xlim=xlims, ylim=ylims)
       #Add contours
       contour(r, add=TRUE, labcex = 1.2)
       # Add country lines
-      # library("maps")
-      # map(add=TRUE, col=rgb(1,0,0,.5))
+      #library("maps")
+      #map(add=TRUE, col="black")
       if (!is.na(shp)) plot(shp_longlat, border=rgb(1,0,0,.75), add=TRUE)
       par(op)
       dev.off()
