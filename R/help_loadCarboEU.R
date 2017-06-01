@@ -52,6 +52,10 @@ help_loadCarboEU <- function(datapath = "/Users/brennerj/tmp/eve_f2_data/data/pr
 
   # create zoo object
   dat_zoo <- zoo::zoo(dummy[,-c(1:5)], date_time)
+  
+  # finished
+  print(paste("finished reading station", ST, sep=" "))
+              
   # return zoo object
   return(dat_zoo)
 }
