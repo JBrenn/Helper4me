@@ -23,13 +23,11 @@ library(chron)
 # load eddy covariance data
 data(eses1)
 # extract precipitation
-LE <- eses1$Precip
-# NA "interpolation"
-LE_spline <- zoo::na.spline(LE, maxgap=10)
-# aggregate latent heat, convert to evapotranspiration
-ET <- help_aggrLE(LE = LE_spline, perc_thresh = .1, ET = TRUE)
+P <- eses1$Precip
+# aggregate precipitation, convert to daily sum
+P <- help_aggrP(LE = P, perc_thresh = .1)
 # plot time series
-plot(ET)
+plot(P)
 
 }
 \references{

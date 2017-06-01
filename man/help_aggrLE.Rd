@@ -17,7 +17,9 @@ help_aggrLE(LE, perc_thresh = 0.1, ET = TRUE)
 zoo object, containing quality daily latent heat or evapotranspiration data
 }
 \description{
-Daily aggregation of latent heat data from eddy covariance systems. Native data time resolution is sub-daily. Conversion to evapotranspiration flux (mm/d) is possible.
+Daily aggregation of latent heat data from eddy covariance systems.
+Native data time resolution is sub-daily.
+Conversion to evapotranspiration flux (mm/d) is possible.
 }
 \examples{
 library(zoo)

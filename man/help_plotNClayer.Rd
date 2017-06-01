@@ -2,15 +2,18 @@
 % Please edit documentation in R/help_plotNClayer.R
 \name{help_plotNClayer}
 \alias{help_plotNClayer}
-\title{impute timeseries in netCDF (at site).}
+\title{plot single layer netCDF.}
 \usage{
 help_plotNClayer(infile, var = "pre", shp = NA, proj_utm = FALSE,
   crs_proj4 = "+proj=utm +zone=30 +ellps=intl +units=m +no_defs",
   plot_proj_utm = TRUE, outfolder,
-  colorRampPal = colorRampPalette(brewer.pal(9, "Blues"))(100))
+  colorRampPal = colorRampPalette(brewer.pal(9, "Blues"))(100),
+  zlims = NULL, xlims = NULL, ylims = NULL, flip = FALSE)
 }
 \arguments{
 \item{infile}{netCDF file.}
+
+\item{var}{netCDF variable.}
 
 \item{shp}{shape file, optional.}
 
@@ -23,6 +26,14 @@ help_plotNClayer(infile, var = "pre", shp = NA, proj_utm = FALSE,
 \item{outfolder}{output folder}
 
 \item{colorRampPal}{colorRampPalette}
+
+\item{zlims}{value limits for ploting}
+
+\item{xlims}{x limits for ploting}
+
+\item{ylims}{y limits for ploting}
+
+\item{flip}{boolean, default=FALSE, flip the values of a Raster* object by inverting the order of the rows (direction=y)}
 }
 \value{
 plot in pdf.
