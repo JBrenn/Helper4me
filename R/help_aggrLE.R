@@ -1,6 +1,8 @@
 #' Aggregate latent heat data.
 #'
-#' Daily aggregation of latent heat data from eddy covariance systems. Native data time resolution is sub-daily. Conversion to evapotranspiration flux (mm/d) is possible.
+#' Daily aggregation of latent heat data from eddy covariance systems.
+#' Native data time resolution is sub-daily.
+#' Conversion to evapotranspiration flux (mm/d) is possible.
 #'
 #' @param LE zoo object, subdaily latent heat data in W/m2
 #' @param perc_thresh threshold (percentage of NAs [0;1]) defining if specific day fulfills data quality
@@ -38,25 +40,21 @@ help_aggrLE <- function(LE, perc_thresh = 0.1, ET = TRUE) {
   zoo::coredata(LE) <- ifelse(zoo::coredata(LE)<0, 0, zoo::coredata(LE))
   # extract date
   date <- as.Date(time(LE))
-  # dummy vector
-  x <- c()
-  # loop over unique dates
-  for (i in unique(date))
-  {
+  x <- sapply(X = unique(date),   function (x) {
     # data for single day
-    datadate <- LE[date==i,]
+    datadate <- LE[date==x,]
     # percent of NAs in day
-    na_perc <- sum(is.na(datadate))/length(datadate)
+    na_perc <- mean(is.na(datadate))/length(datadate)
     if (na_perc < perc_thresh) {
       # if percent of NAs < perc_thresh
-      # calculate mean daily LE [W/m2]
-      x <- c(x,mean(datadate))
+      # calculate daily P [mm/day]
+      y <- sum(datadate)
     } else {
       # if percent of NAs >= perc_thresh
       # ommit data, write out NA
-      x <- c(x,NA)
+      y <- NA
     }
-  }
+  })
   # calculate evapotranspiration (mm/d) from latent heat (W/m2 = J/(m2 s))
   if (ET) x <- x / 2454000 *60 *60 *24
   # create zoo object
@@ -64,5 +62,3 @@ help_aggrLE <- function(LE, perc_thresh = 0.1, ET = TRUE) {
   # return zoo object
   return(out)
 }
-
-

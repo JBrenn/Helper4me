@@ -13,13 +13,11 @@
 #' # load eddy covariance data
 #' data(eses1)
 #' # extract precipitation
-#' LE <- eses1$Precip
-#' # NA "interpolation"
-#' LE_spline <- zoo::na.spline(LE, maxgap=10)
-#' # aggregate latent heat, convert to evapotranspiration
-#' ET <- help_aggrLE(LE = LE_spline, perc_thresh = .1, ET = TRUE)
+#' P <- eses1$Precip
+#' # aggregate precipitation, convert to daily sum
+#' P <- help_aggrP(LE = P, perc_thresh = .1)
 #' # plot time series
-#' plot(ET)
+#' plot(P)
 #'
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
 #'
@@ -37,25 +35,22 @@ help_aggrP <- function(P, perc_thresh = 0.1) {
   zoo::coredata(P) <- ifelse(zoo::coredata(P)<0, 0, zoo::coredata(P))
   # extract date
   date <- as.Date(time(P))
-  # dummy vector
-  x <- c()
   # loop over unique dates
-  for (i in unique(date))
-  {
+  x <- sapply(X = unique(date),   function (x) {
     # data for single day
-    datadate <- P[date==i,]
+    datadate <- P[date==x,]
     # percent of NAs in day
     na_perc <- sum(is.na(datadate))/length(datadate)
     if (na_perc < perc_thresh) {
       # if percent of NAs < perc_thresh
       # calculate daily P [mm/day]
-      x <- c(x,sum(datadate))
+      y <- sum(datadate)
     } else {
       # if percent of NAs >= perc_thresh
       # ommit data, write out NA
-      x <- c(x,NA)
+      y <- NA
     }
-  }
+  })
   # create zoo object
   out <- zoo::zoo(x, unique(date))
   # return zoo object
