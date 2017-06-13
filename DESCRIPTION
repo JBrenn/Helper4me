@@ -17,5 +17,6 @@ Imports:
     zoo,
     RNetCDF,
     lubridate,
-    raster
+    raster,
+    readr
 RoxygenNote: 6.0.1
