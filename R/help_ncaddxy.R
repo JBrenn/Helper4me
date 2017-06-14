@@ -56,8 +56,15 @@ help_ncaddxy <- function(nc, header="header.txt")
 
     # x attributes
     RNetCDF::att.put.nc(nc_con, "x", "_FillValue", "NC_DOUBLE", -9999.)
+    RNetCDF::att.put.nc(nc_con, "x", "long_name", "NC_CHAR", "x coordinate of projection")
+    RNetCDF::att.put.nc(nc_con, "x", "units", "NC_CHAR", "Meter")
+    RNetCDF::att.put.nc(nc_con, "x", "axis", "NC_CHAR", "X")
+
     # y attributes
     RNetCDF::att.put.nc(nc_con, "y", "_FillValue", "NC_DOUBLE", -9999.)
+    RNetCDF::att.put.nc(nc_con, "y", "long_name", "NC_CHAR", "y coordinate of projection")
+    RNetCDF::att.put.nc(nc_con, "y", "units", "NC_CHAR", "Meter")
+    RNetCDF::att.put.nc(nc_con, "y", "axis", "NC_CHAR", "Y")
 
     # put xx, yy
     RNetCDF::var.put.nc(ncfile = nc_con, variable = "x", data = xx)
