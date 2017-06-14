@@ -4,6 +4,7 @@
 #'
 #' @param nc netCDF files.
 #' @param header header file name, default="header.txt".
+#' @param InvP boolean, if TRUE reverse yy variable
 #'
 #' @return NULL, saves netCDF file containing x(x) and y(y) variables.
 #'
@@ -19,7 +20,7 @@
 #'
 #' @export help_ncaddxy
 #'
-help_ncaddxy <- function(nc, header="header.txt")
+help_ncaddxy <- function(nc, header="header.txt", InvP=FALSE)
 {
   # read header
     print(paste(nc))
@@ -46,7 +47,7 @@ help_ncaddxy <- function(nc, header="header.txt")
     # calculate x(x), y(y)
     xx <- seq(from = xllcorner_h+.5*cellsize_h, by = cellsize_h, length.out = x_len)
     yy <- seq(from = yllcorner_h+.5*cellsize_h, by = cellsize_h, length.out = y_len)
-
+    if (InvP) yy <- rev(yy)
     # x(x), y(y)
     # variable definition
     # x, dim(x)
