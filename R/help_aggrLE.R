@@ -47,8 +47,8 @@ help_aggrLE <- function(LE, perc_thresh = 0.1, ET = TRUE) {
     na_perc <- mean(is.na(datadate))/length(datadate)
     if (na_perc < perc_thresh) {
       # if percent of NAs < perc_thresh
-      # calculate daily P [mm/day]
-      y <- sum(datadate)
+      # calculate daily LE [mm/day]
+      y <- mean(datadate)
     } else {
       # if percent of NAs >= perc_thresh
       # ommit data, write out NA
