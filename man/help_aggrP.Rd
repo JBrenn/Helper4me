@@ -25,7 +25,7 @@ data(eses1)
 # extract precipitation
 P <- eses1$Precip
 # aggregate precipitation, convert to daily sum
-P <- help_aggrP(LE = P, perc_thresh = .1)
+P <- help_aggrP(P = P, perc_thresh = .1)
 # plot time series
 plot(P)
 
