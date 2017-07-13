@@ -4,12 +4,14 @@
 \alias{help_ncaddxy}
 \title{Add projected coordinates to netCDF.}
 \usage{
-help_ncaddxy(nc, header = "header.txt")
+help_ncaddxy(nc, header = "header.txt", InvP = FALSE)
 }
 \arguments{
 \item{nc}{netCDF files.}
 
 \item{header}{header file name, default="header.txt".}
+
+\item{InvP}{boolean, if TRUE reverse yy variable}
 }
 \value{
 NULL, saves netCDF file containing x(x) and y(y) variables.
