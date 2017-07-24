@@ -28,18 +28,21 @@ help_2EVE <- function(dir = 1, setwdir = TRUE)
   {
     if (grepl("ces251",sysinfo["nodename"])) pre <- "/Users/brennerj/tmp/eve_f2_home/"
     if (grepl("eve",sysinfo["nodename"])) pre <- "/home/brennerj/"
+    if (grepl("node",sysinfo["nodename"])) pre <- "/home/brennerj/"
   }
   # dir: work
   if (dir == 2)
   {
     if (grepl("ces251",sysinfo["nodename"])) pre <- "/Users/brennerj/tmp/eve_f2_work/"
     if (grepl("eve",sysinfo["nodename"])) pre <- "/work/brennerj/"
+    if (grepl("node",sysinfo["nodename"])) pre <- "/work/brennerj/"
   }
   # dir: data
   if (dir == 3)
   {
     if (grepl("ces251",sysinfo["nodename"])) pre <- "/Users/brennerj/tmp/eve_f2_data/"
     if (grepl("eve",sysinfo["nodename"])) pre <- "/data/"
+    if (grepl("node",sysinfo["nodename"])) pre <- "/data/"
   }
 
   if (setwdir) setwd(pre)
