@@ -27,28 +27,28 @@ help_2EVE <- function(dir = 1, setwdir = TRUE)
   if (dir == 1)
   {
     if (grepl("ces251",sysinfo["nodename"])) pre <- "/Users/brennerj/tmp/eve_f2_home/"
-    if (grepl("eve",sysinfo["nodename"])) pre <- "/home/brennerj/"
+    if (grepl("frontend",sysinfo["nodename"])) pre <- "/home/brennerj/"
     if (grepl("node",sysinfo["nodename"])) pre <- "/home/brennerj/"
   }
   # dir: work
   if (dir == 2)
   {
     if (grepl("ces251",sysinfo["nodename"])) pre <- "/Users/brennerj/tmp/eve_f2_work/"
-    if (grepl("eve",sysinfo["nodename"])) pre <- "/work/brennerj/"
+    if (grepl("frontend",sysinfo["nodename"])) pre <- "/work/brennerj/"
     if (grepl("node",sysinfo["nodename"])) pre <- "/work/brennerj/"
   }
   # dir: data
   if (dir == 3)
   {
     if (grepl("ces251",sysinfo["nodename"])) pre <- "/Users/brennerj/tmp/eve_f2_data/"
-    if (grepl("eve",sysinfo["nodename"])) pre <- "/data/"
+    if (grepl("frontend",sysinfo["nodename"])) pre <- "/data/"
     if (grepl("node",sysinfo["nodename"])) pre <- "/data/"
   }
   # dir: edge
   if (dir == 4)
   {
     if (grepl("ces251",sysinfo["nodename"])) pre <- "/Users/brennerj/tmp/eve_f2_edge/"
-    if (grepl("eve",sysinfo["nodename"])) pre <- "/data/edge/"
+    if (grepl("frontend",sysinfo["nodename"])) pre <- "/data/edge/"
     if (grepl("node",sysinfo["nodename"])) pre <- "/data/edge/"
   }
 
