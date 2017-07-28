@@ -2,7 +2,7 @@
 #'
 #' Allocate path to root directories (/home, /work, /data) at EVE server.
 #'
-#' @param dir directory at EVE serever, 1: home, 2: work, 3: data
+#' @param dir directory at EVE serever, 1: home, 2: work, 3: data, 4: data/edge
 #' @param setwdir boolean, if TRUE set working directory to dir
 #'
 #' @return path to directory
