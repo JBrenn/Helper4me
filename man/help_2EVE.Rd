@@ -7,7 +7,7 @@
 help_2EVE(dir = 1, setwdir = TRUE)
 }
 \arguments{
-\item{dir}{directory at EVE serever, 1: home, 2: work, 3: data}
+\item{dir}{directory at EVE serever, 1: home, 2: work, 3: data, 4: data/edge}
 
 \item{setwdir}{boolean, if TRUE set working directory to dir}
 }
