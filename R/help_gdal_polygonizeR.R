@@ -1,6 +1,32 @@
+#' rasters into shape.
+#'
+#' Getting rasters into shape with gdal.
+#'
+#' @param x raster
+#' @param outshape character, output shape file, default=NULL
+#' @param gdalformat character, gdal format description, default="ESRI Shapefile"
+#' @param pypath character, path to python script 'gdal_polygonize.py', default=NULL: R will search for script
+#' @param readpoly boolean, raed polygon in R, default=TRUE
+#' @param quiet 
+#'
+#' @return shape
+#'
+#' @examples
+#' 
+#'
+#' @author Johannes Brenner \email{johannes.brenner@ufz.de}
+#'
+#' @references https://johnbaumgartner.wordpress.com/2012/07/26/getting-rasters-into-shape-from-r/
+#'
+#' @seealso
+#'
+#' @keywords
+#'
+#' @export help_gdal_polygonizeR
+#'
 ## Define the function
-gdal_polygonizeR <- function(x, outshape=NULL, gdalformat = 'ESRI Shapefile',
-                             pypath=NULL, readpoly=TRUE, quiet=TRUE) {
+help_gdal_polygonizeR <- function(x, outshape=NULL, gdalformat = 'ESRI Shapefile',
+                                  pypath=NULL, readpoly=TRUE, quiet=TRUE) {
   if (isTRUE(readpoly)) require(rgdal)
   if (is.null(pypath)) {
     pypath <- Sys.which('gdal_polygonize.py')
