@@ -41,8 +41,8 @@ help_2EVE <- function(dir = 1, setwdir = TRUE)
   if (dir == 3)
   {
     if (grepl("ces251",sysinfo["nodename"])) pre <- "/Users/brennerj/tmp/eve_f2_data/"
-    if (grepl("frontend",sysinfo["nodename"])) pre <- "/data/"
-    if (grepl("node",sysinfo["nodename"])) pre <- "/data/"
+    if (grepl("frontend",sysinfo["nodename"])) pre <- "/data/stohyd/"
+    if (grepl("node",sysinfo["nodename"])) pre <- "/data/stohyd/"
   }
   # dir: edge
   if (dir == 4)
