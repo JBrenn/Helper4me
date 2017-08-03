@@ -7,12 +7,12 @@
 #' @param gdalformat character, gdal format description, default="ESRI Shapefile"
 #' @param pypath character, path to python script 'gdal_polygonize.py', default=NULL: R will search for script
 #' @param readpoly boolean, raed polygon in R, default=TRUE
-#' @param quiet 
+#' @param quiet
 #'
 #' @return shape
 #'
 #' @examples
-#' 
+#'
 #'
 #' @author Johannes Brenner \email{johannes.brenner@ufz.de}
 #'
@@ -50,8 +50,7 @@ help_gdal_polygonizeR <- function(x, outshape=NULL, gdalformat = 'ESRI Shapefile
   } else if (is.character(x)) {
     rastpath <- normalizePath(x)
   } else stop('x must be a file path (character string), or a Raster object.')
-  system2('python', args=(sprintf('"%1$s" "%2$s" -f "%3$s" "%4$s.shp"',
-                                  pypath, rastpath, gdalformat, outshape)))
+  system(paste("python ", pypath, " ", rastpath, " -f '", gdalformat, "' ", outshape, ".shp", sep=""))
   if (isTRUE(readpoly)) {
     shp <- readOGR(dirname(outshape), layer = basename(outshape), verbose=!quiet)
     return(shp)
