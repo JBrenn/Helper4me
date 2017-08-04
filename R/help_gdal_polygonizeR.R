@@ -26,7 +26,8 @@
 #'
 ## Define the function
 help_gdal_polygonizeR <- function(x, outshape=NULL, gdalformat = 'ESRI Shapefile',
-                                  pypath=NULL, readpoly=TRUE, quiet=TRUE) {
+                                  pypath=NULL, readpoly=TRUE, quiet=TRUE)
+{
   if (isTRUE(readpoly)) require(rgdal)
   if (is.null(pypath)) {
     pypath <- Sys.which('gdal_polygonize.py')
@@ -51,11 +52,14 @@ help_gdal_polygonizeR <- function(x, outshape=NULL, gdalformat = 'ESRI Shapefile
     rastpath <- paste(outshape, "tif", sep=".")
   } else if (is.character(x)) {
     rastpath <- normalizePath(x)
-  } else stop('x must be a file path (character string), or a Raster object.')
+  } else {
+    stop('x must be a file path (character string), or a Raster object.')
+  }
   system(paste("python ", pypath, " ", rastpath, " -f '", gdalformat, "' ", outshape, ".shp", sep=""))
   if (isTRUE(readpoly)) {
     shp <- readOGR(dirname(outshape), layer = basename(outshape), verbose=!quiet)
     return(shp)
+  } else {
+    return(NULL)
   }
-  return(NULL)
 }
