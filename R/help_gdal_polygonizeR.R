@@ -43,7 +43,9 @@ help_gdal_polygonizeR <- function(x, outshape=NULL, gdalformat = 'ESRI Shapefile
       stop(sprintf('File already exists: %s',
                    toString(paste(outshape, c('shp', 'shx', 'dbf'),
                                   sep='.')[f.exists])), call.=FALSE)
-  } else outshape <- tempfile()
+  } else {
+    outshape <- tempfile()
+  }
   if (is(x, 'Raster')) {
     require(raster)
     #writeRaster(x, {f <- tempfile(fileext='.tif')})
