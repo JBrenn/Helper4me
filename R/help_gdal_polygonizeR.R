@@ -45,8 +45,10 @@ help_gdal_polygonizeR <- function(x, outshape=NULL, gdalformat = 'ESRI Shapefile
   } else outshape <- tempfile()
   if (is(x, 'Raster')) {
     require(raster)
-    writeRaster(x, {f <- tempfile(fileext='.tif')})
-    rastpath <- normalizePath(f)
+    #writeRaster(x, {f <- tempfile(fileext='.tif')})
+    writeRaster(x, paste(outshape, "tif", sep="."))
+    #rastpath <- normalizePath(f)
+    rastpath <- paste(outshape, "tif", sep=".")
   } else if (is.character(x)) {
     rastpath <- normalizePath(x)
   } else stop('x must be a file path (character string), or a Raster object.')
