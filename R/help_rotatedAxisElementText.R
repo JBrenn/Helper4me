@@ -23,7 +23,7 @@
 #'  }
 #' }
 #' @rdname rotatedAxisElementText
-#' @export
+#' @export rotatedAxisElementText
 #Build Function to Return Element Text Object
 rotatedAxisElementText = function(angle,position='x'){
   angle     = angle[1];
