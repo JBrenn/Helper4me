@@ -1,20 +1,32 @@
 #' @title Return Element Text Object
 #' @description Return Element Text Object in pecific angles
-#' @param angle PARAM_DESCRIPTION
-#' @param position PARAM_DESCRIPTION, Default: 'x'
-#' @return OUTPUT_DESCRIPTION
-#' @details DETAILS
-#' @examples 
+#' @param angle angle in which to turn element [0;360]
+#' @param position axis position, Default: 'x'
+#' @return
+#' @details
+#' @examples
 #' \dontrun{
 #' if(interactive()){
-#'  #EXAMPLE1
+#' #Load Required Libraries
+#'library(ggplot2)
+#'library(gridExtra)
+#'  #Demonstrate Usage for a Variety of Rotations
+#'df    = data.frame(x=0.5,y=0.5)
+#'plots = lapply(seq(0,90,length.out=4),function(a){
+#'  ggplot(df,aes(x,y)) +
+#'    geom_point() +
+#'    theme(axis.text.x = rotatedAxisElementText(a,'x'),
+#'          axis.text.y = rotatedAxisElementText(a,'y')) +
+#'    labs(title = sprintf("Rotated %s",a))
+#'})
+#'grid.arrange(grobs=plots)
 #'  }
 #' }
 #' @rdname rotatedAxisElementText
-#' @export 
+#' @export
 #Build Function to Return Element Text Object
 rotatedAxisElementText = function(angle,position='x'){
-  angle     = angle[1]; 
+  angle     = angle[1];
   position  = position[1]
   positions = list(x=0,y=90,top=180,right=270)
   if(!position %in% names(positions))
