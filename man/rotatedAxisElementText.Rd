@@ -7,23 +7,29 @@
 rotatedAxisElementText(angle, position = "x")
 }
 \arguments{
-\item{angle}{PARAM_DESCRIPTION}
+\item{angle}{angle in which to turn element [0;360]}
 
-\item{position}{PARAM_DESCRIPTION, Default: 'x'}
-}
-\value{
-OUTPUT_DESCRIPTION
+\item{position}{axis position, Default: 'x'}
 }
 \description{
 Return Element Text Object in pecific angles
 }
-\details{
-DETAILS
-}
 \examples{
 \dontrun{
 if(interactive()){
- #EXAMPLE1
+#Load Required Libraries
+library(ggplot2)
+library(gridExtra)
+ #Demonstrate Usage for a Variety of Rotations
+df    = data.frame(x=0.5,y=0.5)
+plots = lapply(seq(0,90,length.out=4),function(a){
+ ggplot(df,aes(x,y)) +
+   geom_point() +
+   theme(axis.text.x = rotatedAxisElementText(a,'x'),
+         axis.text.y = rotatedAxisElementText(a,'y')) +
+   labs(title = sprintf("Rotated \%s",a))
+})
+grid.arrange(grobs=plots)
  }
 }
 }

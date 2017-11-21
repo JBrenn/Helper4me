@@ -33,6 +33,7 @@ help_summarySE <- function(data=NULL, measurevar, groupvars=NULL, na.rm=FALSE,
                  .fun = function(xx, col) {
                    c(N    = length2(xx[[col]], na.rm=na.rm),
                      mean = mean   (xx[[col]], na.rm=na.rm),
+                     median = median (xx[[col]], na.rm=na.rm),
                      sd   = sd     (xx[[col]], na.rm=na.rm)
                    )
                  },
