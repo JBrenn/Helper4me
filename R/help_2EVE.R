@@ -23,8 +23,6 @@ help_2EVE <- function(dir = 1, setwdir = TRUE)
 {
   sysinfo <- Sys.info()
 
-  if(setwdir) print("set working directory to")
-
   # dir: home
   if (dir == 1)
   {
@@ -54,7 +52,10 @@ help_2EVE <- function(dir = 1, setwdir = TRUE)
     if (grepl("node",sysinfo["nodename"])) pre <- "/data/edge/"
   }
 
-  if (setwdir) setwd(pre)
+  if (setwdir) {
+    print(paste("set working directory to", pre))
+    setwd(pre)
+  }
 
   return(pre)
 }
