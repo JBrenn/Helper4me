@@ -23,8 +23,8 @@ help_2EVE <- function(dir = 1, setwdir = TRUE)
 {
   sysinfo <- Sys.info()
 
-  print("set working directory to")
-  
+  if(setwdir) print("set working directory to")
+
   # dir: home
   if (dir == 1)
   {
