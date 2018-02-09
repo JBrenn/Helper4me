@@ -4,7 +4,7 @@
 \alias{help_2EVE}
 \title{Allocate path to root directories at EVE server.}
 \usage{
-help_2EVE(dir = 1, setwdir = TRUE)
+help_2EVE(dir = 1, setwdir = FALSE)
 }
 \arguments{
 \item{dir}{directory at EVE serever, 1: home, 2: work, 3: data, 4: data/edge}

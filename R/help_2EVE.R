@@ -19,7 +19,7 @@
 #'
 #' @export help_2EVE
 #'
-help_2EVE <- function(dir = 1, setwdir = TRUE)
+help_2EVE <- function(dir = 1, setwdir = FALSE)
 {
   sysinfo <- Sys.info()
 
