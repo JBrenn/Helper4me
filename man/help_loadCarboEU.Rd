@@ -5,13 +5,15 @@
 \title{Load CarboEurope station data.}
 \usage{
 
-  help_loadCarboEU(datapath = "/Users/brennerj/tmp/eve_f2_data/data/processed/eddy_carbo_europe",
-  station = "ESES1")
+  help_loadCarboEU(datapath = "/Users/brennerj/tmp/eve_f2_data/data/processed/eddy_carbo_europe_201709/",
+  station = "ESES1", stationlist = FALSE)
 }
 \arguments{
 \item{datapath}{full path to pre-processed data files}
 
 \item{station}{station descrption, e.g. "ESES1"}
+
+\item{stationlist}{gather information on FLUXnet sites, if FALSE normal proceeding of function, if charater or NA site information output, e.g. "ES" for sites in Spain.}
 }
 \value{
 zoo object, containing all CarboEU station data, chron datetime representation

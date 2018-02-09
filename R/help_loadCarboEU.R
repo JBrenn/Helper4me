@@ -21,7 +21,7 @@
 help_loadCarboEU <- function(datapath = "/Users/brennerj/tmp/eve_f2_data/data/processed/eddy_carbo_europe_201709/",
                              station = "ESES1", stationlist=FALSE)
 {
-  if (class(stationlist)=="character" | is.na(stationlist)) {
+  if (class(stationlist[1])=="character" | is.na(stationlist[1])) {
     # get filenames from datapth dir for stationlist
     files <- dir(path = datapath, full.names = F)
     files <- files[!grepl(".zip", files) | !grepl(".txt", files)]
@@ -32,12 +32,15 @@ help_loadCarboEU <- function(datapath = "/Users/brennerj/tmp/eve_f2_data/data/pr
     id    <- c()
     end   <- c()
     start <- c()
+    station_loop <- c()
     
-    if (is.na(stationlist)) {
+    if (is.na(stationlist[1])) {
       station_loop <- stationaccrym
     } else {
       stationaccrym_pl <- paste("_", stationaccrym, sep="")
-      station_loop <- stationaccrym[grepl(paste("_",stationlist,sep=""), stationaccrym_pl)]
+      for (i in stationlist) {
+        station_loop <- c(station_loop, stationaccrym[grepl(paste("_",i,sep=""), stationaccrym_pl)])
+      }
     }
     
     for (i in 1:length(station_loop)) {
