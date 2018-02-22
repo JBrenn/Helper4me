@@ -13,7 +13,7 @@
 
 \item{station}{station descrption, e.g. "ESES1"}
 
-\item{stationlist}{gather information on FLUXnet sites, if FALSE normal proceeding of function, if charater or NA site information output, e.g. "ES" for sites in Spain.}
+\item{stationlist}{gather information on FLUXnet sites, if FALSE normal proceeding of function, if charater vector or NA site information output, e.g. c("PT","ES") for sites over Iberian peninsula.}
 }
 \value{
 zoo object, containing all CarboEU station data, chron datetime representation
