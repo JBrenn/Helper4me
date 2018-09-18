@@ -4,8 +4,8 @@
 \alias{help_summarySE}
 \title{help_summarySE}
 \usage{
-help_summarySE(data = NULL, measurevar, groupvars = NULL, na.rm = FALSE,
-  conf.interval = 0.95, .drop = TRUE)
+help_summarySE(data = NULL, measurevar, groupvars = NULL,
+  na.rm = FALSE, conf.interval = 0.95, .drop = TRUE)
 }
 \arguments{
 \item{data}{data frame, Default: NULL}

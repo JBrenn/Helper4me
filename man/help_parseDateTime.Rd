@@ -4,8 +4,9 @@
 \alias{help_parseDateTime}
 \title{parse to Date or Date.Time objects.}
 \usage{
-help_parseDateTime(x.date, x.time, format = list(date = "\%Y-\%m-\%d", time =
-  "\%H:\%M:\%S"), parse.to = "chron", fasttime = FALSE, timezone = "GMT")
+help_parseDateTime(x.date, x.time, format = list(date = "\%Y-\%m-\%d",
+  time = "\%H:\%M:\%S"), parse.to = "chron", fasttime = FALSE,
+  timezone = "GMT")
 }
 \arguments{
 \item{x.date}{date character vector.}

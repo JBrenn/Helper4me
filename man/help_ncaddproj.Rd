@@ -4,8 +4,8 @@
 \alias{help_ncaddproj}
 \title{Add projected coordinates to netCDF.}
 \usage{
-help_ncaddproj(nc, to = "proj", coordsys = 23030, varnames = c(x = "lon",
-  y = "lat"))
+help_ncaddproj(nc, to = "proj", coordsys = 23030, varnames = c(x =
+  "lon", y = "lat"))
 }
 \arguments{
 \item{nc}{netCDF files.}

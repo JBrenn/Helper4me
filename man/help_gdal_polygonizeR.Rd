@@ -4,8 +4,9 @@
 \alias{help_gdal_polygonizeR}
 \title{rasters into shape.}
 \usage{
-help_gdal_polygonizeR(x, outshape = NULL, gdalformat = "ESRI Shapefile",
-  pypath = NULL, readpoly = TRUE, quiet = TRUE)
+help_gdal_polygonizeR(x, outshape = NULL,
+  gdalformat = "ESRI Shapefile", pypath = NULL, readpoly = TRUE,
+  quiet = TRUE)
 }
 \arguments{
 \item{x}{raster}
